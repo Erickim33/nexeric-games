@@ -1,0 +1,30 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Request deletion of your Nexeric Games account and data."><title>Delete my data — Nexeric Games</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800;900&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css"></head><body data-page="help">
+<header class="nav" id="site-header"></header>
+<main class="page"><div class="wrap"><h1>Delete my data</h1><p class="lead">Ask me to delete your account and the data linked to it, for Safe Card or MazeX. It takes about a minute.</p>
+<div class="box"><form id="f"><label for="t">What do you want deleted?</label><select id="t"><option>Delete my account and all my data</option><option>Delete only my scores and leaderboard entries</option></select>
+<label for="g">Game</label><select id="g"></select>
+<label for="u">Your username or the email you use in the app</label><input id="u" required autocomplete="off" placeholder="e.g. your username">
+<label for="n">Anything else? (optional)</label><textarea id="n" rows="3"></textarea>
+<label class="chk" style="margin-top:18px"><input type="checkbox" id="c" required> <span>I understand deletion can't be undone.</span></label>
+<div class="row"><button class="btn main" type="submit">Prepare my request</button></div></form>
+<noscript><p>JavaScript is off. Email <a href="mailto:kimanieric412@gmail.com" data-mailto="Delete my data" data-email>kimanieric412@gmail.com</a> with the subject "Delete my data", your game and your username.</p></noscript></div>
+<div id="out" class="box ok" hidden tabindex="-1" role="status"><h2 style="margin-top:0">Almost done: send it to me</h2><p>Your reference is <b id="ref"></b>. Choose how to send this message. The request is only sent once you press send in your email.</p><pre id="pre"></pre>
+<div class="row"><a id="m" class="btn main" href="#">Open in my email app</a><a id="gm" class="btn" href="#" target="_blank" rel="noopener">Open in Gmail</a><button id="cp" class="btn" type="button">Copy message</button></div><p style="margin-bottom:0">Or paste it into an email to <b data-email>kimanieric412@gmail.com</b> yourself.</p></div>
+<h2>What happens next</h2><ol><li>I reply to confirm it's you. Reply from the email linked to your account if you can.</li><li>I delete the data within 30 days and email you when it's done.</li></ol>
+<div class="tabs"><div><b>Deleted</b>Your account, username, points, wins and leaderboard entries.</div><div><b>Kept</b>Nothing linked to you, except records I'm legally required to keep.</div></div>
+<h2>Data on your device</h2><p>Anything stored only on your phone is removed when you uninstall the game: Settings > Apps > the game > Uninstall. If you played in your browser, clear this site's data in your browser settings.</p>
+<p>See the <a href="privacy.html">privacy policy</a> or <a href="contact.html">contact me</a>.</p></div></main>
+<footer id="site-footer"></footer>
+<script src="games.js"></script><script src="site.js"></script><script>
+var f=document.getElementById('f'),out=document.getElementById('out');
+f.addEventListener('submit',function(e){e.preventDefault();
+var ref='DEL-'+Date.now().toString(36).toUpperCase();
+var txt='Reference: '+ref+'\nRequest: '+t.value+'\nGame: '+g.value+'\nUsername or email in the app: '+u.value.trim()+'\nNotes: '+(n.value.trim()||'none')+'\n\nI confirm this is my account and I understand deletion cannot be undone.';
+var sub='Delete my data ('+ref+')',enc=encodeURIComponent;
+document.getElementById('ref').textContent=ref;document.getElementById('pre').textContent=txt;
+document.getElementById('m').href='mailto:'+SITE.email+'?subject='+enc(sub)+'&body='+enc(txt);
+document.getElementById('gm').href='https://mail.google.com/mail/?view=cm&fs=1&to='+SITE.email+'&su='+enc(sub)+'&body='+enc(txt);
+out.hidden=false;out.scrollIntoView({behavior:'smooth'});out.focus()});
+document.getElementById('cp').addEventListener('click',function(){var b=this,tx=document.getElementById('pre').textContent;
+(navigator.clipboard?navigator.clipboard.writeText(tx):Promise.reject()).then(function(){b.textContent='Copied'},function(){var r=document.createRange();r.selectNodeContents(document.getElementById('pre'));var s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Press copy on your keyboard'})});
+</script></body></html>

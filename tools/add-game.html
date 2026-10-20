@@ -1,0 +1,44 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Add a game — Nexeric Games</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800;900&display=swap" rel="stylesheet"><link rel="stylesheet" href="../style.css"></head>
+<body><main class="page"><div class="wrap">
+<h1>Add a game</h1><p class="lead">Fill this in and I'll write the block to paste into <b>games.js</b>. This page is only for you, so you don't need to upload the <b>tools</b> folder.</p>
+<div class="box"><form id="f">
+<label for="name">Game name</label><input id="name" required placeholder="e.g. Sky Dash">
+<label for="slug">Page name (auto-filled, lowercase with dashes)</label><input id="slug" required>
+<label for="tag">Type of game</label><input id="tag" placeholder="e.g. Puzzle, Racing, Card game">
+<label for="tagline">One-line tagline</label><input id="tagline" placeholder="e.g. Jump high. Don't look down.">
+<label for="about">Short description</label><textarea id="about" rows="3"></textarea>
+<label for="c1">Colours: background start, background end, highlight</label>
+<div class="row" style="margin-top:0"><input id="c1" type="color" value="#262626" style="width:90px;padding:4px;height:48px"><input id="c2" type="color" value="#0f0f0f" style="width:90px;padding:4px;height:48px"><input id="c3" type="color" value="#bdbdbd" style="width:90px;padding:4px;height:48px"></div>
+<label for="apkf">Choose your APK file (just to read its size)</label><input id="apkf" type="file" accept=".apk">
+<label for="icon">Icon file name (goes in img/)</label><input id="icon" placeholder="e.g. skydash-icon.png">
+<label for="shots">Screenshot file names, separated by commas (go in img/)</label><input id="shots" placeholder="e.g. skydash-1.webp, skydash-2.webp">
+<label for="chips">Little labels, separated by commas (optional)</label><input id="chips" placeholder="e.g. Offline, 20 levels">
+<label for="feat">Features, one per line as: Title | text</label><textarea id="feat" rows="4" placeholder="Fast levels | Every level takes under a minute."></textarea>
+<label for="how">How to play, one step per line</label><textarea id="how" rows="4"></textarea>
+<label for="web">Link to the browser version (optional, turns on "Play in browser")</label><input id="web" placeholder="https://...">
+<label for="play">Google Play link (optional)</label><input id="play" placeholder="https://play.google.com/store/apps/details?id=...">
+<label class="chk"><input type="checkbox" id="soon"> <span>Not ready yet: show "Coming soon" instead of Download</span></label>
+<div class="row"><button class="btn main" type="submit">Make my game block</button></div></form></div>
+<div id="out" class="box ok" hidden tabindex="-1"><h2 style="margin-top:0">Your game block</h2>
+<ol><li>Open <b>games.js</b>. Find the last <b>}</b> of the last game inside the list, and type a comma after it.</li><li>Paste the block below right after that comma.</li><li>Put the files in the folders listed here, then upload the site again.</li></ol>
+<pre id="files"></pre><textarea id="code" rows="14" readonly style="font:.9rem ui-monospace,monospace"></textarea><div class="row"><button id="cp" class="btn main" type="button">Copy block</button></div></div>
+</div></main>
+<script>
+var $=function(i){return document.getElementById(i)},size='';
+$('name').addEventListener('input',function(){$('slug').value=this.value.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')});
+$('apkf').addEventListener('change',function(){var f=this.files[0];size=f?(f.size/1048576).toFixed(1)+' MB':''});
+function lines(v){return v.split('\n').map(function(x){return x.trim()}).filter(Boolean)}
+function list(v){return v.split(',').map(function(x){return x.trim()}).filter(Boolean)}
+$('f').addEventListener('submit',function(e){e.preventDefault();
+var s=$('slug').value,shots=list($('shots').value),icon=$('icon').value.trim()||s+'-icon.png',apk=s+'.apk';
+if(!shots.length)shots=[s+'-1.webp'];
+var g={slug:s,name:$('name').value.trim(),tag:$('tag').value.trim(),tagline:$('tagline').value.trim(),about:$('about').value.trim(),
+bg:'linear-gradient(135deg,'+$('c1').value+','+$('c2').value+')',accent:$('c3').value,icon:icon,apk:apk,size:size,play:$('play').value.trim(),web:$('web').value.trim(),soon:$('soon').checked,
+chips:list($('chips').value),heroShot:shots[0],homeShot:shots[1]||shots[0],shots:shots,thumb:shots[0],
+features:lines($('feat').value).map(function(l){var p=l.split('|');return [p[0].trim(),(p[1]||'').trim()]}),sections:[],howto:lines($('how').value),faq:[]};
+$('code').value=JSON.stringify(g,null,2);
+$('files').textContent='downloads/'+apk+'   <- rename your APK to this\nimg/'+icon+'\n'+shots.map(function(x){return 'img/'+x}).join('\n');
+$('out').hidden=false;$('out').scrollIntoView({behavior:'smooth'});$('out').focus()});
+$('cp').addEventListener('click',function(){$('code').select();var b=this;(navigator.clipboard?navigator.clipboard.writeText($('code').value):Promise.reject()).then(function(){b.textContent='Copied'},function(){document.execCommand('copy');b.textContent='Copied'})});
+</script></body></html>
