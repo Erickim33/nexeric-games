@@ -20,7 +20,7 @@ Safe Card's browser version asks for capacitor.js and admob.js (Android-only fil
 
 ## Files
 index.html, game.html (all game pages), play.html (browser play), about.html, instructions.html, help.html, contact.html, delete.html, privacy.html
-games.js = your games and settings    site.js = builds the pages    style.css = design    img/  downloads/    tools/add-game.html = helper (no need to upload)
+games.js = your games and settings    site.js = builds the pages    style.css = design    favicon.svg / favicon.ico / apple-touch-icon.png / icon-192.png / icon-512.png = the website icon (replace these files to change it)    img/  downloads/    tools/add-game.html = helper (no need to upload)
 
 ## Google Play links
 Privacy policy: your-site/privacy.html     Account deletion: your-site/delete.html

@@ -19,7 +19,7 @@
   };
   var names = G.map(function (g) { return g.name; });
   var nameList = names.length > 1 ? names.slice(0, -1).join(', ') + ' and ' + names[names.length - 1] : (names[0] || 'my games');
-  var gicon = G[0] && G[0].icon, ico = function (f) { document.head.insertAdjacentHTML('beforeend', '<link rel="icon" href="img/' + esc(f) + '">'); };
+  var gicon = G[0] && G[0].icon, ico = function () {};  /* the site icon is set in each page's head */
   var gid = function () { var s = new URLSearchParams(location.search).get('g'); return G.filter(function (x) { return x.slug === s; })[0]; };
   var parts = S.name.split(' '), brand = esc(parts[0]) + '<b>' + esc(parts.slice(1).join(' ')) + '</b>';
 

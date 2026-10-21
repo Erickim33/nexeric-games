@@ -123,3 +123,14 @@ body{padding-bottom:0}[id]{scroll-margin-top:120px}}
 @media(max-width:900px){header.nav{position:relative}[id]{scroll-margin-top:16px}}
 
 img.avatar{object-fit:cover;object-position:50% 25%;background:#fff;border:4px solid #ffffff2e;box-shadow:0 14px 34px #0008}.creator{grid-template-columns:200px 1fr}.avatar{width:170px;height:170px}
+
+/* ---- About page on phones: stack the creator card, tighten spacing ---- */
+@media(max-width:900px){
+.wrap{padding-left:18px;padding-right:18px}
+.creator{grid-template-columns:1fr;gap:18px;padding:26px 20px}
+.creator .avatar{width:140px;height:140px;margin:0 auto}
+.creator h3,.creator .role{text-align:center}
+.big{font-size:1.15rem}
+.hero.ab .wrap{padding-bottom:26px}.hero .ab-icons{justify-content:flex-start;padding-bottom:6px}
+.gcard{padding:24px}.next{padding:30px 22px}.steps.say .step{font-size:1.25rem;padding:22px 20px}
+}
